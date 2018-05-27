@@ -1,0 +1,115 @@
+[v-cloak] {
+  display: none;
+}
+
+.dark-button {
+  background-color: #2E2D2C;
+  color: #B2AEAA;
+}
+
+.dark-button:hover {
+  background-color: #B2AEAA;
+  color: #2E2D2C;
+  border: 1px solid #2E2D2C;
+}
+
+.light-button {
+  background-color: #B2AEAA;
+  color: #2E2D2C;
+}
+
+.light-button:hover {
+  background-color: #2E2D2C;
+  color: #B2AEAA;
+  border: 1px solid #B2AEAA;
+}
+
+.container {
+  color: #2E2D2C;
+}
+
+.header-div {
+  padding: 0;
+  margin: 5px 0 0 0;
+  width: 100%;
+  background-color: #0087B2;
+  color: #FF8D19;
+  border-top: 2px solid #2E2D2C;
+  border-left: 2px solid #2E2D2C;
+  border-right: 2px solid #2E2D2C;
+  border-radius: 15px 15px 0 0;
+}
+
+.game-screen {
+  padding: 0;
+  margin: 0;
+  background-color: #B2AEAA;
+  border: 2px solid #2E2D2C;
+  width: 100%;
+  height: auto;
+  border-radius: 0 0 15px 15px;
+}
+
+.start-game-btn {
+  margin: 15% 0;
+}
+
+.status {
+  padding: 0;
+  border-bottom: 2px solid #2E2D2C;
+  border-right: 2px solid #2E2D2C;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.status-list-item {
+  margin: 0;
+  padding: 5px;
+  background-color: #B2AEAA;
+}
+
+.status-bar {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: auto;
+  transition: width 500ms;
+}
+
+#health-bar {
+  background-color: #125970;
+  width: 0;
+}
+
+#magic-bar {
+  background-color: #721310;
+  width: 0;
+}
+
+.visual-display {
+  padding: 0;
+  margin: 0;
+  border-bottom: 2px solid #2E2D2C;
+}
+
+.card-header, .card-footer, .card-body input, .card-body input:focus {
+  background-color: #2E2D2C;
+  color: #B2AEAA;
+}
+
+.card-body {
+  background-color: #B2AEAA;
+}
+
+.text-card {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.battle .list-group .list-group-item {
+  background-color: #B2AEAA;
+}
+
+/*# sourceMappingURL=styles.css.map */

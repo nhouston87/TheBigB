@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Big B</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="container" v-cloak>
+
+        <div class="row header-div" v-if="!gameRun">
+          <div class="col-12">
+            <h1 class="text-center">The Big B!</h1>
+          </div>
+        </div>
+
+        <div class="row header-div" v-else>
+          <div class="col-9">
+            <h1 class="text-center">The Big B!</h1>
+          </div>
+          <div class="col-3 mr-auto">
+            <h1>Chapter: {{ chapter }}</h1>
+          </div>
+        </div>
+
+        <div class="row game-screen" v-if="!gameRun">
+          <div class="col-12 text-center">
+            <button class="btn dark-button start-game-btn" type="button" name="button" @click="startGame">Start New Game!</button>
+          </div>
+        </div>
+
+        <div class="row game-screen" v-else>
+          <div class="col-12">
+            <div class="row">
+
+              <div class="col-3 status">
+                <ul class="list-group">
+                  <li class="list-group-item status-list-item">
+                    <p>{{ hName }} (Lvl: {{ hLvl }})</p>
+                  </li>
+                  <li class="list-group-item status-list-item">
+                    <p>Exp: {{ hExp }}</p>
+                  </li>
+                  <li class="list-group-item status-list-item">
+                    <p>Lives: {{ hLife }}</p>
+                  </li>
+                  <li class="list-group-item status-list-item">
+                    <div class="status-bar">
+                      Health
+                      <div
+                        id="health-bar"
+                        class="status-bar text-center"
+                        :style="{width: setStat(hHcur, hHmax)}">
+                        {{ hHcur }}/{{ hHmax }}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item status-list-item">
+                    <div class="status-bar">
+                      Magic
+                      <div
+                        id="magic-bar"
+                        class="status-bar text-center"
+                        :style="{width: setStat(hMcur, hMmax)}">
+                        {{ hMcur }}/{{ hMmax }}
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-9 visual-display" v-if="!nameIsSet">
+                <div class="card text-card">
+                  <div class="card-header">
+                    <h4>Dante talks to you...</h4>
+                  </div>
+                  <div class="card-body">
+                    <h5>The Big B has seized control of the land, we must stand and fight him!</h5>
+                    <h5>What is your name Hero?</h5>
+                    <input class="form-control" type="text" v-model="hName" >
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn light-button mt-2" type="button" @click="setHeroName">Set Name</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-9 visual-display" v-else>
+                <div class="show-text" v-if="displayText">
+                  <div class="card text-card">
+                    <div class="card-header">
+                      <h4>Dante talks to you...</h4>
+                    </div>
+                    <div class="card-body">
+                      <h5>{{ assembleText() }}</h5>
+                    </div>
+                    <div class="card-footer">
+                      <button class="btn light-button" type="button" name="button" @click="displayPrevText">Back</button>
+                      <button class="btn light-button" type="button" name="button" @click="displayNextText">Next</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="battle" v-else>
+                  <ul class="list-group mb-2">
+                    <li class="list-group-item" v-for="diag in bDiag">{{ diag }}</li>
+                  </ul>
+                  <button class="btn btn-sm dark-button ml-2 mb-2" type="button" @click="toNextBattle" v-if="nextBattle">Next Battle</button>
+                  <button class="btn btn-sm dark-button ml-2 mb-2" type="button" @click="toNextChapter" v-if="nextChapter">Next Chapter</button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-9">
+                <div id="game-controls">
+                  <div class="row mt-3 mb-3">
+                    <div class="col-9">
+                      <button class="btn btn-sm dark-button" type="button" >Items</button>
+                      <button class="btn btn-sm dark-button" type="button" @click="normAtk">Attack</button>
+                      <button class="btn btn-sm dark-button" type="button" @click="specAtk(csatk1)">{{ csatk1 || "special attack 1 N/A" }}</button>
+                      <button class="btn btn-sm dark-button" type="button" @click="specAtk(csatk2)">{{ csatk2 || "special attack 2 N/A" }}</button>
+                      <button class="btn btn-sm dark-button" type="button" v-if="displayText">Set Skills</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div id="monster-stats">
+                  <p>Monster Health: {{ mHcur }}/{{ mHmax }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
